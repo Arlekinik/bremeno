@@ -16,8 +16,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    text-align: center;
+    min-height: 100vh;   /* вместо height */
+    padding: 40px 20px;  /* чтобы текст не прилипал к краям */
 }
 
 .container {
@@ -40,8 +40,15 @@ h1 {
 }
 
 .qr-box img {
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
+}
+
+@media (max-width: 768px) {
+    .qr-box img {
+        width: 280px;
+        height: 280px;
+    }
 }
 
 .button {
@@ -91,7 +98,7 @@ h1 {
 
     <div class="qr-box">
         <!-- ВСТАВЬ СЮДА СВОЙ QR -->
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://Arlekinik.github.io/bremeno/" alt="QR Code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://https://arlekinik.github.io/bremeno/index.html" alt="QR Code">
     </div>
 
     <!-- КНОПКА ТЕПЕРЬ СРАЗУ ПОД QR -->
