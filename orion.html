@@ -3,76 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Голосование</title>
+<title>Голосование — Сцена</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
+    text-align: center;
 }
 
 .container {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
+    font-size: 38px;
     margin-bottom: 30px;
-    font-weight: 700;
+}
+
+.qr-box {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.qr-box img {
+    width: 250px;
+    height: 250px;
 }
 
 .button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 15px 0;
-    font-size: 18px;
+    margin-top: 25px;
+    padding: 15px 40px;
+    font-size: 20px;
     font-weight: 600;
     border: none;
     border-radius: 12px;
     cursor: pointer;
+    background: #ff416c;
+    color: white;
     transition: all 0.3s ease;
-}
-
-.teamA {
-    background: #ff4b2b;
-    color: white;
-}
-
-.teamB {
-    background: #00c6ff;
-    color: white;
 }
 
 .button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-.success {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: 600;
+.results {
+    margin-top: 35px;
+    font-size: 28px;
+    font-weight: 700;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .show {
     opacity: 1;
+    transform: translateY(0);
+}
+
+.winner {
+    font-size: 34px;
+    margin-top: 15px;
+    color: #00ffcc;
 }
 </style>
 </head>
@@ -80,33 +87,32 @@ h1 {
 <body>
 
 <div class="container">
-    <h1>Выберите свою сторону</h1>
-    
-    <button class="button teamA" onclick="vote('A')">
-        🔴 Команда А
-    </button>
-    
-    <button class="button teamB" onclick="vote('B')">
-        🔵 Команда Б
+    <h1>Сканируйте QR-код и голосуйте</h1>
+
+    <div class="qr-box">
+        <!-- ВСТАВЬ СЮДА СВОЙ QR -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://your-site.com/index.html" alt="QR Code">
+    </div>
+
+    <!-- КНОПКА ТЕПЕРЬ СРАЗУ ПОД QR -->
+    <button class="button" onclick="showResults()">
+        Показать результаты
     </button>
 
-    <div id="message" class="success">
-        ✅ Ваш голос учтён!
+    <!-- РЕЗУЛЬТАТЫ НИЖЕ КНОПКИ -->
+    <div id="results" class="results">
+        Команда А — 73%<br>
+        Команда Б — 27%
+        <div class="winner">
+            🏆 Победила Команда А!
+        </div>
     </div>
 </div>
 
 <script>
-function vote(team) {
-    document.getElementById("message").classList.add("show");
-
-    // Блокировка повторного голосования
-    document.querySelectorAll(".button").forEach(btn => {
-        btn.disabled = true;
-        btn.style.opacity = "0.6";
-    });
-
-    // Если захочешь сохранять голос:
-    // localStorage.setItem("vote", team);
+function showResults() {
+    const results = document.getElementById("results");
+    results.classList.add("show");
 }
 </script>
 
