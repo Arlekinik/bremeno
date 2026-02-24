@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Голосование</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.teamA {
+    background: #ff4b2b;
+    color: white;
+}
+
+.teamB {
+    background: #00c6ff;
+    color: white;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.success {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.show {
+    opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Выберите свою сторону</h1>
+    
+    <button class="button teamA" onclick="vote('A')">
+        🔴 Команда А
+    </button>
+    
+    <button class="button teamB" onclick="vote('B')">
+        🔵 Команда Б
+    </button>
+
+    <div id="message" class="success">
+        ✅ Ваш голос учтён!
+    </div>
+</div>
+
+<script>
+function vote(team) {
+    document.getElementById("message").classList.add("show");
+
+    // Блокировка повторного голосования
+    document.querySelectorAll(".button").forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = "0.6";
+    });
+
+    // Если захочешь сохранять голос:
+    // localStorage.setItem("vote", team);
+}
+</script>
+
+</body>
+</html>
